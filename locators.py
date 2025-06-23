@@ -24,3 +24,12 @@ class TestLocators:
     CONSTRUCTOR_BUTTON_LOCATOR = (By.XPATH, "//*[contains(text(), 'Конструктор')]")
     LOGO_LOCATOR = (By.XPATH, "//*[contains(@class, 'AppHeader_header__logo')]")
 
+    # Вкладки конструктора
+    CONSTRUCTOR_TAB_BUN_LOCATOR = (By.XPATH, "//span[text()='Булки']")
+    CONSTRUCTOR_TAB_SAUCE_LOCATOR = (By.XPATH, "//span[text()='Соусы']")
+    CONSTRUCTOR_TAB_FILLING_LOCATOR = (By.XPATH, "//span[text()='Начинки']")
+
+    # Активные вкладки конструктора (для проверки активности)
+    ACTIVE_TAB_BUN_LOCATOR = (By.XPATH, "//div[contains(@class, 'tab_tab_type_current') and .//span[text()='Булки']]")
+    ACTIVE_TAB_SAUCE_LOCATOR = (By.XPATH, "//div[contains(@class, 'tab_tab_type_current') and .//span[text()='Соусы']]")
+    ACTIVE_TAB_FILLING_LOCATOR = (By.XPATH, "//div[contains(@class, 'tab_tab_type_current') and .//span[text()='Начинки']]")

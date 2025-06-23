@@ -1,54 +1,25 @@
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from locators import TestLocators
+from data import TestLinks
 
 class AuthHelper:
+    def __init__(self, driver):
+        self.driver = driver
 
-    @staticmethod
-    def registration(driver, email, password, name):
-        # Заполняем имя
-        name_input = WebDriverWait(driver, 5).until(
-            EC.visibility_of_element_located((By.XPATH, ".//*[text()='Имя']/following-sibling::input"))
-        )
-        name_input.clear()
-        name_input.send_keys(name)
+    def login(self, email, password):
+        self.driver.get(TestLinks.login_page_link)
+        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(TestLocators.EMAIL_LOCATOR)).send_keys(email)
+        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(TestLocators.PASSWORD_LOCATOR)).send_keys(password)
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(TestLocators.LOGIN_BUTTON_LOCATOR)).click()
 
-        # Заполняем email
-        email_input = driver.find_element(By.XPATH, ".//*[text()='Email']/following-sibling::input")
-        email_input.clear()
-        email_input.send_keys(email)
+    def logout(self):
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(TestLocators.PERSONAL_ACCOUNT_BUTTON_LOCATOR)).click()
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(TestLocators.LOGOUT_BUTTON_LOCATOR)).click()
 
-        # Заполняем пароль
-        password_input = driver.find_element(By.XPATH, ".//*[text()='Пароль']/following-sibling::input")
-        password_input.clear()
-        password_input.send_keys(password)
-
-        # Нажимаем кнопку "Зарегистрироваться"
-        register_button = driver.find_element(By.XPATH, '//*[contains(@class, "button_button_type_primary")]')
-        register_button.click()
-
-    @staticmethod
-    def confirm_registration_success(driver):
-        # Можно проверять, что URL сменился на страницу логина
-        WebDriverWait(driver, 5).until(EC.url_contains("/login"))
-
-    @staticmethod
-    def login(driver, email, password):
-        email_input = WebDriverWait(driver, 5).until(
-            EC.visibility_of_element_located((By.XPATH, ".//*[text()='Email']/following-sibling::input"))
-        )
-        email_input.clear()
-        email_input.send_keys(email)
-
-        password_input = driver.find_element(By.XPATH, ".//*[text()='Пароль']/following-sibling::input")
-        password_input.clear()
-        password_input.send_keys(password)
-
-        login_button = driver.find_element(By.XPATH, '//*[contains(@class, "button_button_type_primary")]')
-        login_button.click()
-
-    @staticmethod
-    def confirm_login_success(driver):
-        # Проверяем, что после входа URL стал главным
-        WebDriverWait(driver, 5).until(EC.url_contains("/"))
-
+    def registration(self, email, password, name):
+        self.driver.get(TestLinks.registration_page_link)
+        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(TestLocators.EMAIL_LOCATOR)).send_keys(email)
+        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(TestLocators.PASSWORD_LOCATOR)).send_keys(password)
+        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(TestLocators.NAME_LOCATOR)).send_keys(name)
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(TestLocators.REGISTER_BUTTON_LOCATOR)).click()
