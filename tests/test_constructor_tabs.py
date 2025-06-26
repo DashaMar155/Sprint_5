@@ -1,32 +1,80 @@
 import pytest
-from selenium.webdriver.support.ui import WebDriverWait
+from locators import Locators
+from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from locators import TestLocators
-from data import TestLinks
+
+# Тест на активацию раздела 'Булки' в конструкторе
+class TestCheckChapterBread:
+    def test_check_chapter_bread(self, start_from_login_page):
+        driver = start_from_login_page
+        driver.maximize_window()
+
+        # Кликаем сначала по Соусам, чтобы уйти с вкладки Булки
+        sause = WebDriverWait(driver, 5).until(EC.element_to_be_clickable(Locators.inscription_sause))
+        driver.execute_script("arguments[0].scrollIntoView();", sause)
+        sause.click()
+
+        # Кликаем по вкладке Булки
+        bread = WebDriverWait(driver, 5).until(EC.element_to_be_clickable(Locators.inscription_bread))
+        driver.execute_script("arguments[0].scrollIntoView();", bread)
+        bread.click()
+
+        # Ждём, когда "Булки" станут активными
+        WebDriverWait(driver, 5).until(
+            EC.text_to_be_present_in_element(Locators.active_section, "Булки")
+        )
+
+        active_section = driver.find_element(*Locators.active_section)
+        assert "Булки" in active_section.text
 
 
-class TestConstructorTabs:
 
-    @pytest.mark.parametrize("tab_locator, active_tab_locator", [
-        (TestLocators.CONSTRUCTOR_TAB_BUN_LOCATOR, TestLocators.ACTIVE_TAB_BUN_LOCATOR),
-        (TestLocators.CONSTRUCTOR_TAB_SAUCE_LOCATOR, TestLocators.ACTIVE_TAB_SAUCE_LOCATOR),
-        (TestLocators.CONSTRUCTOR_TAB_FILLING_LOCATOR, TestLocators.ACTIVE_TAB_FILLING_LOCATOR),
-    ])
-    def test_constructor_tabs(self, driver, tab_locator, active_tab_locator):
-        driver.get(TestLinks.main_page_link)
+# Тест на активацию раздела 'Начинки' в конструкторе
+class TestCheckChapterFillings:
+    def test_check_chapter_fillings(self, start_from_login_page):
+        driver = start_from_login_page
+        driver.maximize_window()
 
-        # Ждём, пока вкладка станет кликабельной (берём элемент <span>)
-        tab_span = WebDriverWait(driver, 10).until(EC.element_to_be_clickable(tab_locator))
+        # Клик по "Соусы" через JS, чтобы убрать возможные перекрытия
+        sause = WebDriverWait(driver, 5).until(EC.element_to_be_clickable(Locators.inscription_sause))
+        driver.execute_script("arguments[0].click();", sause)
 
-        # Прокручиваем к элементу
-        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", tab_span)
+        # Клик по "Начинки" с прокруткой и через JS
+        fillings = WebDriverWait(driver, 5).until(EC.element_to_be_clickable(Locators.inscription_fillings))
+        driver.execute_script("arguments[0].scrollIntoView(true);", fillings)
+        driver.execute_script("arguments[0].click();", fillings)
 
-        # Чтобы избежать ElementClickInterceptedException, кликаем через JS
-        driver.execute_script("arguments[0].click();", tab_span)
+        # Ждем появления нужного текста
+        WebDriverWait(driver, 5).until(
+            EC.text_to_be_present_in_element(Locators.active_section, "Начинки")
+        )
 
-        # Ждём, пока активная вкладка станет видимой
-        active_tab = WebDriverWait(driver, 10).until(EC.visibility_of_element_located(active_tab_locator))
+        active_section = driver.find_element(*Locators.active_section)
+        assert "Начинки" in active_section.text
 
-        # Проверяем, что вкладка действительно активна (в её классе есть tab_tab_type_current)
-        classes = active_tab.get_attribute("class")
-        assert "tab_tab_type_current" in classes, f"Вкладка с локатором {tab_locator} не активна"
+
+
+# Тест на активацию раздела 'Соусы' в конструкторе
+class TestCheckChapterSauce:
+    def test_check_chapter_sauce(self, start_from_login_page):
+        driver = start_from_login_page
+        driver.maximize_window()
+
+        # Клик по вкладке "Начинки"
+        fillings = WebDriverWait(driver, 10).until(EC.element_to_be_clickable(Locators.inscription_fillings))
+        driver.execute_script("arguments[0].scrollIntoView(true);", fillings)
+        driver.execute_script("arguments[0].click();", fillings)
+
+        # Клик по вкладке "Соусы"
+        sause = WebDriverWait(driver, 10).until(EC.element_to_be_clickable(Locators.inscription_sause))
+        driver.execute_script("arguments[0].scrollIntoView(true);", sause)
+        driver.execute_script("arguments[0].click();", sause)
+
+        # Ждём, что в элементе active_section появится текст "Соусы"
+        WebDriverWait(driver, 10).until(
+            EC.text_to_be_present_in_element(Locators.active_section, "Соусы")
+        )
+
+        active_section = driver.find_element(*Locators.active_section)
+        assert "Соусы" in active_section.text
+
