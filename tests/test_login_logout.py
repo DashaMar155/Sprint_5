@@ -4,13 +4,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 from locators import Locators
 from curl import *
 from data import Credantial
-from conftest import driver, start_from_login_page, start_from_main_not_login, start_from_recovery_page, start_from_main_not_login
 
 
-# проверка выхода из аккаунта
-class TestButtonCheckExit:
+class TestLoginAndLogout:
+
+    # Проверка выхода из аккаунта
     def test_check_logging_out(self, start_from_login_page):
-
         driver = start_from_login_page
         driver.maximize_window()
 
@@ -22,11 +21,8 @@ class TestButtonCheckExit:
 
         assert driver.current_url == login_site
 
-
-# вход через большую кнопку "Войти в аккаунт" на главной
-class TestBigMainButton:
+    # Вход через большую кнопку "Войти в аккаунт" на главной
     def test_check_entrance_by_big_button(self, start_from_main_not_login):
-
         driver = start_from_main_not_login
         driver.maximize_window()
 
@@ -38,22 +34,16 @@ class TestBigMainButton:
 
         assert driver.current_url == main_site
 
-
-# восстановление пароля и вход
-class TestCheckRegister:
+    # Вход после восстановления пароля
     def test_login_password_recovery(self, start_from_recovery_page):
-
         driver = start_from_recovery_page
         driver.maximize_window()
-        WebDriverWait(driver, 3).until(EC.visibility_of_element_located(Locators.inscription_bread))
 
+        WebDriverWait(driver, 3).until(EC.visibility_of_element_located(Locators.inscription_bread))
         assert driver.current_url == main_site
 
-
-# проверка входа через ссылки "Зарегистрироваться"
-class TestCheckEntranceFromRecoveryPage:
+    # Вход через ссылку «Зарегистрироваться» → «Войти»
     def test_button_inscription_login(self, start_from_main_not_login):
-
         driver = start_from_main_not_login
         driver.maximize_window()
 

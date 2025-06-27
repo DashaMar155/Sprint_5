@@ -1,69 +1,56 @@
 import pytest
 from selenium import webdriver
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from locators import Locators
-from curl import *
-from data import Credantial
-from generation_ep import EmailPasswordGenerator
+from selenium.webdriver.chrome.options import Options
+from auth_helper import AuthHelper
+from data import TestLinks, Credantial
+from generation_ep import generate_unique_email
 
 
+# Фикстура WebDriver
 @pytest.fixture
 def driver():
-    driver = webdriver.Chrome()
-    driver.maximize_window()
+    options = Options()
+    options.add_argument('--window-size=1920,1080')
+    driver = webdriver.Chrome(options=options)
     yield driver
     driver.quit()
 
 
+# Фикстура: уникальный email
 @pytest.fixture
-def start_from_login_page(driver):
-
-    driver.get(login_site)
-    driver.find_element(*Locators.field_email).send_keys(Credantial.email)
-    driver.find_element(*Locators.field_password).send_keys(Credantial.password)
-    driver.find_element(*Locators.button_entrance).click()
-    return driver
+def test_email():
+    return generate_unique_email()
 
 
+# Фикстура: фиксированный пароль (из data.py)
 @pytest.fixture
-def start_from_recovery_page(driver):
-
-    driver.get(login_site)
-    driver.find_element(*Locators.button_restore_password).click()
-
-    WebDriverWait(driver, 6).until(EC.visibility_of_element_located(Locators.inscription_button_entrance))
-
-    driver.find_element(*Locators.inscription_button_entrance).click()
-    driver.find_element(*Locators.field_email).send_keys(Credantial.email)
-    driver.find_element(*Locators.field_password).send_keys(Credantial.password)
-    driver.find_element(*Locators.button_entrance).click()
-    return driver
+def test_password():
+    return Credantial.password
 
 
+# Фикстура: имя пользователя (из data.py)
 @pytest.fixture
-def start_from_main_not_login(driver):
-
-    driver.get(main_site)
-    return driver
+def test_name():
+    return Credantial.name
 
 
+# Фикстура для регистрации пользователя
 @pytest.fixture
-def register_new_account(driver):
+def registered_user(driver, test_email, test_password, test_name):
+    driver.get(TestLinks.registration_page_link)
+    AuthHelper.register(driver, test_email, test_password, test_name)
+    AuthHelper.confirm_successful_registration(driver)
+    return test_email, test_password
 
-    driver.get(login_site)
-    driver.find_element(*Locators.inscription_login).click()
 
-    generator = EmailPasswordGenerator()
-    email, password = generator.generate()
+# Фикстура для авторизованного пользователя
+@pytest.fixture
+def authorized_user(driver, registered_user):
+    email, password = registered_user
+    driver.get(TestLinks.login_page_link)
+    AuthHelper.login(driver, email, password)
+    AuthHelper.confirm_successful_login(driver)
+    return email, password
 
-    driver.find_element(*Locators.field_name).send_keys(Credantial.name)
-    driver.find_element(*Locators.field_email).send_keys(email)
-    driver.find_element(*Locators.field_password).send_keys(password)
-    driver.find_element(*Locators.button_register).click()
-
-    WebDriverWait(driver, 4).until(EC.visibility_of_element_located(Locators.button_entrance)).click()
-
-    return driver, email, password
 
 

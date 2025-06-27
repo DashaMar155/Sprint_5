@@ -5,26 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3cd89a9a-021c-4a99-b4bd-5a68a1e69d5b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/chromedriver.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/curl.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/generation_ep.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_login_logout.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_navigation_personal_account.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth_helper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_helper.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generator.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/locators.py" beforeDir="false" afterPath="$PROJECT_DIR$/locators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pytest.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/__init__.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_constructor_tabs.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_constructor_tabs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_login.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_logout.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_navigation_to_account.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_navigation_to_constructor.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_registration.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,15 +48,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python tests.Python tests in test_check_entrance.py.executor": "Run",
-    "Python.conftest.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "#1 on develop"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python tests.Python tests in test_check_entrance.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.conftest.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;#1 on develop&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\User\PycharmProjects\Sprint_5\tests" />
