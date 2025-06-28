@@ -6,10 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="3cd89a9a-021c-4a99-b4bd-5a68a1e69d5b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_helper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_constructor_tabs.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_constructor_tabs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_navigation_personal_account.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_navigation_personal_account.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_registration.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +87,11 @@
           <url>file://$PROJECT_DIR$/tests/test_constructor_tabs.py</url>
           <line>60</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/auth_helper.py</url>
+          <line>7</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
