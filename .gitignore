@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Виртуальное окружение
+.venv/
+env/
+venv/
+
+# PyCharm
+.idea/
+
+# Логи
+*.log
+
+# Файлы с настройками среды
+*.env
+*.env.*
+
+# Базы данных
+*.sqlite3
+
+# Скомпилированные файлы Cython
+*.c
+
+# Отчеты тестирования
+htmlcov/
+.coverage
+
+# Файлы macOS
+.DS_Store
+
+# Другие
+*.bak
+*.swp
