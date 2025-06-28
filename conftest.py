@@ -22,25 +22,16 @@ def test_email():
     return generate_unique_email()
 
 
-# Фикстура: фиксированный пароль (из data.py)
-@pytest.fixture
-def test_password():
-    return Credantial.password
-
-
-# Фикстура: имя пользователя (из data.py)
-@pytest.fixture
-def test_name():
-    return Credantial.name
-
-
 # Фикстура для регистрации пользователя
 @pytest.fixture
-def registered_user(driver, test_email, test_password, test_name):
+def registered_user(driver, test_email):
+    password = Credantial.password
+    name = Credantial.name
+
     driver.get(TestLinks.registration_page_link)
-    AuthHelper.register(driver, test_email, test_password, test_name)
+    AuthHelper.register(driver, test_email, password, name)
     AuthHelper.confirm_successful_registration(driver)
-    return test_email, test_password
+    return test_email, password
 
 
 # Фикстура для авторизованного пользователя
@@ -51,6 +42,5 @@ def authorized_user(driver, registered_user):
     AuthHelper.login(driver, email, password)
     AuthHelper.confirm_successful_login(driver)
     return email, password
-
 
 

@@ -2,8 +2,8 @@ import pytest
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from locators import Locators
-from curl import *
 from data import Credantial
+from curl import main_site, login_site  # <-- только нужные переменные
 
 
 class TestLoginAndLogout:
@@ -13,9 +13,13 @@ class TestLoginAndLogout:
         driver = start_from_login_page
         driver.maximize_window()
 
-        WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Locators.inscription_bread))
+        WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located(Locators.inscription_bread)
+        )
         driver.find_element(*Locators.button_personal_area).click()
-        WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Locators.inscription_profile))
+        WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located(Locators.inscription_profile)
+        )
         driver.find_element(*Locators.button_exit).click()
         WebDriverWait(driver, 10).until(EC.url_to_be(login_site))
 
@@ -39,7 +43,9 @@ class TestLoginAndLogout:
         driver = start_from_recovery_page
         driver.maximize_window()
 
-        WebDriverWait(driver, 3).until(EC.visibility_of_element_located(Locators.inscription_bread))
+        WebDriverWait(driver, 3).until(
+            EC.visibility_of_element_located(Locators.inscription_bread)
+        )
         assert driver.current_url == main_site
 
     # Вход через ссылку «Зарегистрироваться» → «Войти»
